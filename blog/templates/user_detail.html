@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+​
+{% block title %}个人资料 - {{ user.username }}{% endblock %}
+​
+{% block page_content %}
+<div class="page-header">
+    <img class="img-rounded profile-thumbnail" src="{{ url_for('static',filename='code200.png') }}">
+    <div class="profile-header">
+        {% if user.username %}
+            用户名：<b>{{ user.username }}</b>
+            <br>
+            {% if user.email %}
+                邮箱：<b>{{ user.email}}</b>
+            {% else %}
+                 邮箱:<b style="color:red;">未填写</b>
+            {% endif %}
+            <br>
+            {% if user.address %}
+                地址：
+                <b>
+                    <a href="http://map.baidu.com/?newmap=1&ie=utf-8&s=s%26wd%3D{{ user.address }}" target="_blank">{{ user.address}}</a>
+                </b>
+            {% else %}
+                地址:<b style="color:red;">未填写</b>
+            {% endif %}
+            <br>
+            {% if user.hobby %}
+                个人介绍：<b>{{ user.hobby }}</b>
+            {% else %}
+                个人介绍:<b style="color:red;">未填写</b>
+            {% endif %}
+            <br>
+            文章数量：<b>{{ count }}</b>
+        {% endif %}
+        </p>
+        <p>
+            {% if um.id == user.id %}
+               <a class="btn btn-default" href="{{ url_for('edit_info',user_id=user.id) }}">编辑个人信息</a>
+            {% endif %}
+        </p>
+    </div>
+</div>
+<h3> {{ user.username }} 的文章 </h3>
+<ul class="posts">
+    <!--遍历查询用户的所有文章-->
+    {% for article in articles %}
+    <li class="post">
+        <div class="post-thumbnail">
+            <img style="width:40px;height:40px;" src="{{ url_for('static',filename='code.png') }}" alt="" class="avatar">
+        </div>
+        <div class="post-content">
+            <div class="post-body">
+                <p span style="color:blue">
+                    <b>
+                        <a href="{{ url_for('detail',article_id=article.id) }}">{{ article.title }}</a>
+                    </b>
+                </p>
+                <p><span >{{ article.content }}</span></p>
+            </div>
+        </div>
+        <div class="post-footer">
+            <span class="label label-primary">作者：{{ article.author.username }}</span>
+            <span class="label label-primary">时间：{{ article.create_time }}</span>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

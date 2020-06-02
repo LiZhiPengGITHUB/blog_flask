@@ -1,0 +1,18 @@
+{% extends "base02.html" %}
+{% block title %}电影专区{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='css/style02.css') }}"
+		  rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
+{% block page_content %}
+    <div class="search">
+        <div class="s-bar">
+            <form action="{{ url_for('movie_search') }}", method="post">
+                <input name="kw" type="text" value="请输入电影名称"
+                       onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请输入电影名称';}">
+                <input type="submit" value="搜索"/>
+            </form>
+        </div>
+    </div>
+{% endblock %}

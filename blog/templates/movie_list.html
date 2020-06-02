@@ -1,0 +1,44 @@
+{% extends 'base02.html' %}
+{% block title %}电影列表页{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/list.css') }}">
+{% endblock %}
+
+{% block page_content %}
+    <ul>
+        {% for film in films %}
+        <li>
+            <div class="avatar-group">
+                <img src="{{ url_for('static', filename='images/02.jpg') }}"
+                     alt="picture" class="avatar">
+            </div>
+            <div class="question-group">
+                <p class="question-title">
+                    <a href="{{ url_for('movie_detail', film_id=film.id )}}">
+                        {{ film.title }}</a></p>
+                <p class="question-cotent">演员：{{ film.actors }}</p>
+
+            <div class="question-info">
+                <span class="question-author">电影类别：{{ film.classify }}</span>
+            </div>
+            </div>
+        </li>
+        {% else %}
+            <li>
+            <div class="avatar-group">
+                <img src="{{ url_for('static', filename='images/02.jpg') }}" alt="picture" class="avatar">
+            </div>
+            <div class="question-group">
+                <p class="question-title"><a href="#">你搜索的电影暂未查到</a></p>
+                <p class="question-cotent">演员：......</p>
+
+                <div class="question-info">
+                    <span class="question-author">电影类别：......</span>
+                </div>
+            </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

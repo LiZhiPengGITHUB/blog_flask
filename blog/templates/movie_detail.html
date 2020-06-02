@@ -1,0 +1,33 @@
+{% extends 'base02.html'%}
+
+{% block title %}影片详情页{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/detail.css') }}">
+{% endblock %}
+
+{% block page_content %}
+    <h3 class="page-title"></h3>
+    <p class="questions-info">
+        <span>类别：{{ film.classify }}</span>
+    </p>
+    <p class="question-content">
+    <h4>简介：{{ film.content }}</h4>
+
+    </p>
+    <div style="text-align: center">
+        <img  src={{ film.cover_url }} alt={{ film.title }}>
+    </div>
+    <br>
+    <br>
+    <h4>下载地址:</h4>
+<h5>迅雷链接：{{ film.thunder_url }}<a href="{{ film.thunder_url }}">点击下载</a></h5>
+    <a href="#"></a>
+    <h5>磁力链接：{{ film.magnet_url }}<a href="{{ film.magnet_url }}"> 点击下载 </a></h5>
+    <a href="#"></a>
+    <br>
+    <br>
+    <br>
+{% endblock %}
+
